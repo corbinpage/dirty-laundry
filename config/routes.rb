@@ -1,4 +1,31 @@
 DirtyLaundry::Application.routes.draw do
+  post 'users/create' => 'users#create'
+  get 'users/new' => 'users#new', as: :sign_up
+
+  get 'sessions/new' => 'sessions#new', as: :log_in
+  delete 'sessions' => 'sessions#destroy', as: :log_out
+
+  get '/auth/:provider/callback' => 'authentications#create'
+
+  resources :scans
+
+  
+
+
+  
+
+
+
+  get 'dashboard1' => 'dashboards#dashboard1'
+  get 'dashboard2' => 'dashboards#dashboard2'
+  get 'dashboard3' => 'dashboards#dashboard3'
+
+  get 'application' => 'application#home', as: :splash
+  root "application#home" 
+
+  ### devise_for :users, controllers: { sessions: "users/sessions" }
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
