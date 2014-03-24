@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def sub_layout
+    false
+  end
+
   private
   def login_required
     if !logged_in?

@@ -12,7 +12,7 @@
     <%= render 'layouts/navigation' %>
     <main role="main" class="container">
        <%= render 'layouts/messages' %>
-       <%= yield %>
+       <%= controller.sub_layout ? (render :partial => "/layouts/#{controller.sub_layout}") : yield %>
     </main>
       <%= render 'layouts/footer' %>
   </body>
