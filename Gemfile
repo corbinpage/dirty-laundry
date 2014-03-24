@@ -38,7 +38,7 @@ group :development do
   # Use sqlite3 as the database for Active Record
   # gem 'sqlite3'
   gem 'pg'
-  
+
   #Make development easier
   gem 'quiet_assets'
   gem "better_errors"
