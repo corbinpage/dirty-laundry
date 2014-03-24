@@ -1,4 +1,5 @@
 class DashboardsController < ApplicationController
+  before_action :set_scan, only: [:summary, :analytics, :locations]
 
   # GET /dashboard/current
   def current
@@ -7,24 +8,27 @@ class DashboardsController < ApplicationController
 
   # GET /dashboard/:id
   def summary
-    @scan = Scan.find(params[:id])
-    @twitter_detail = @scan.user.twitter_detail
+    #set_scan
   end
 
   # GET /dashboard/:id/analytics
   def analytics
-    @scan = Scan.find(params[:id])
-    @twitter_detail = @scan.user.twitter_detail
+    #set_scan
   end
 
   # GET /dashboard/:id/locations
   def locations
-    @scan = Scan.find(params[:id])
-    @twitter_detail = @scan.user.twitter_detail
+    #set_scan
   end
 
   def sub_layout
     "dashboard"
+  end
+
+  private
+  # Use callbacks to share common setup or constraints between actions.
+  def set_scan
+    @scan = Scan.find(params[:id])
   end
 
 end

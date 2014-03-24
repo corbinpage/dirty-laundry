@@ -5,10 +5,10 @@
       <div class="col-md-12 col-sm-12 widget twitter-profile">
         <div class="twitter-profile-card">
           <div class="twitter-text">
-            <h1 class="name"><%= @twitter_detail.name%></h1>
-            <h2 class="username"><%= @twitter_detail.user_name%></h2>
-            <p class="description"><%= @twitter_detail.description%></p>
-            <p class="location-website"><%=@twitter_detail.location%> - <a href=<%=@twitter_detail.website_url%>><%=@twitter_detail.website_url%></a></p>
+            <h1 class="name"><%= @scan.twitter_detail.name%></h1>
+            <h2 class="username"><%= @scan.twitter_detail.user_name%></h2>
+            <p class="description"><%= @scan.twitter_detail.description%></p>
+            <p class="location-website"><%=@scan.twitter_detail.location%> - <a href=<%=@scan.twitter_detail.website_url%>><%=@scan.twitter_detail.website_url%></a></p>
           </div>
         </div>
       </div>
@@ -19,8 +19,8 @@
   <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-3 col-xs-6">
     <div class="box">
       <div class="description">
-        <p><strong>Active Since</strong></p>
-        <p><%= @twitter_detail.account_created_at%><p>
+        <p>Active Since</p>
+        <p><%= format_datetime_for_dashboard(@scan.twitter_detail.account_created_at)%><p>
       </div>
     </div>
   </div>
@@ -30,7 +30,7 @@
         <span class="glyphicon glyphicon-bullhorn"></span>
       </div>
       <div class="description">
-        <strong><%= @twitter_detail.total_tweets%></strong> Total Tweets
+        <%= number_with_delimiter(@scan.twitter_detail.total_tweets, :delimiter => ',')%> Total Tweets
       </div>
     </div>
   </div>
@@ -40,7 +40,7 @@
         <span class="glyphicon glyphicon-user"></span>
       </div>
       <div class="description">
-        <strong><%= @twitter_detail.followers_count%></strong> Followers
+        <%= number_with_delimiter(@scan.twitter_detail.followers_count, :delimiter => ',')%> Followers
       </div>
     </div>
   </div>
@@ -50,7 +50,7 @@
         <span class="glyphicon glyphicon-eye-open"></span>
       </div>
       <div class="description">
-        Following <strong><%= @twitter_detail.following_count%></strong>
+        Following <%= number_with_delimiter(@scan.twitter_detail.following_count, :delimiter => ',')%>
       </div>
     </div>
   </div>
@@ -60,7 +60,7 @@
         <span class="glyphicon glyphicon-star"></span>
       </div>
       <div class="description">
-        <strong><%= @twitter_detail.favorites_count%></strong> Favorites
+        <%= number_with_delimiter(@scan.twitter_detail.favorites_count, :delimiter => ',')%> Favorites
       </div>
     </div>
   </div>

@@ -11,8 +11,7 @@ class ScansController < ApplicationController
   # GET /scans/1
   # GET /scans/1.json
   def show
-    @scan = Scan.find(params[:id])
-    @twitter_detail = current_user.twitter_detail
+    redirect_to dashboard_path(params[:id])
   end
 
   # GET /scans/new

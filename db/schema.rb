@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 20140319004226) do
     t.string   "twitter_url"
     t.string   "twitter_uid"
     t.integer  "user_id"
+    t.integer  "scan_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,10 +1,10 @@
 class Scan < ActiveRecord::Base
   belongs_to :user
   has_many :tweets, :dependent => :destroy
-
+  has_one :twitter_detail, :dependent => :destroy
 
   def run
-    Tweet.initialize_twitter_client
+    @client = Tweet.initialize_twitter_client
     return unless user_exsts?
 
     get_users_statuses
@@ -15,8 +15,9 @@ class Scan < ActiveRecord::Base
 
   def user_exsts?
     # begin
-      @user = Tweet.client.user(self.username)
+      @user = @client.user(self.username)
       self.error = "Success"
+      self.twitter_detail = TwitterDetail.new(TwitterDetail.user_attributes(@user))
       true
     # rescue
     #   self.error = "Does Not Exist"

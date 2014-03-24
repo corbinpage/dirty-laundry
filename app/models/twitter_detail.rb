@@ -1,5 +1,6 @@
 class TwitterDetail < ActiveRecord::Base
   belongs_to :user
+  belongs_to :scan
   # validates :twitter_uid, uniqueness: true
 
   def self.omniauth_attributes(omniauth)
@@ -24,6 +25,25 @@ class TwitterDetail < ActiveRecord::Base
       attribute_hash[:total_tweets] = omniauth.extra.raw_info.statuses_count
       attribute_hash[:background_image_url] = omniauth.extra.raw_info.profile_background_image_url
     end
+    attribute_hash
+  end
+
+  def self.user_attributes(user_object)
+    attribute_hash = {}
+    attribute_hash[:name] = user_object.name
+    attribute_hash[:profile_image_url] = user_object.profile_image_url_https.to_s
+    attribute_hash[:background_image_url] = user_object.profile_background_image_url_https.to_s
+    attribute_hash[:account_created_at] = user_object.created_at
+    attribute_hash[:location] = user_object.location
+    attribute_hash[:favorites_count] = user_object.favorites_count
+    attribute_hash[:followers_count] = user_object.followers_count
+    attribute_hash[:description] = user_object.description
+    attribute_hash[:following_count] = user_object.friends_count
+    attribute_hash[:total_tweets] = user_object.statuses_count
+    attribute_hash[:user_name] = user_object.username
+    attribute_hash[:website_url] = user_object.website.to_s
+    attribute_hash[:twitter_uid] = user_object.id
+    attribute_hash[:twitter_url] = user_object.url.to_s
     attribute_hash
   end
 
