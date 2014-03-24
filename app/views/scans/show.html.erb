@@ -1,0 +1,113 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Overview</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
+      <h1><%= @twitter_detail.name%>'s Dashboard</h1>
+      <div class="row">
+        <div class="col-md-12 col-sm-12 widget">
+            <div class="panel panel-primary twitter-summary">
+              <div class="panel-heading">Twitter Summary</div>
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th>Data</th>
+                    <th>Value</th> 
+                  </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>Name</td>
+                      <td><%= @twitter_detail.name%></td>
+                    </tr>
+                    <tr>
+                      <td>Handle</td>
+                      <td><%= @twitter_detail.user_name%></td>
+                    </tr>
+                    <tr>
+                      <td>Description</td>
+                      <td><%= @twitter_detail.description%></td>
+                    </tr>
+                    <tr>
+                      <td>Location</td>
+                      <td><%= @twitter_detail.location%></td>
+                    </tr>
+                    <tr>
+                      <td>Created At</td>
+                      <td><%= @twitter_detail.account_created_at%></td>
+                    </tr>
+                    <tr>
+                      <td># of Followers</td>
+                      <td><%= @twitter_detail.followers_count%></td>
+                    </tr>
+                    <tr>
+                      <td># Following</td>
+                      <td><%= @twitter_detail.following_count%></td>
+                    </tr>
+                    <tr>
+                      <td>Total Tweets</td>
+                      <td><%= @twitter_detail.total_tweets%></td>
+                    </tr>
+                    <tr>
+                      <td># of Favorites</td>
+                      <td><%= @twitter_detail.favorites_count%></td>
+                    </tr>
+                    <tr>
+                      <td>Website</td>
+                      <td><%= @twitter_detail.website_url%></td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
+      <h1>Charts</h1>
+      <div class="row">
+        <%= line_chart @scan.tweets.group_by_month(:tweet_time).count %>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
+      <h1>All Tweets</h1>
+      <div class="row">
+        <div class="table-responsive">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th>Text</th>
+                <th>Score</th> 
+                <th>Dirty Words</th>
+                <th>Sentiment Score</th>
+                <th>Sentiment Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @scan.tweets.each do |t| %>
+                <tr>
+                  <td><%= t.text %></td>
+                  <td><%= t.score %></td>
+                  <td><%= t.dirty_words %></td>
+                  <td><%= t.sentiment_score %></td>
+                  <td><%= t.sentiment_summary %></td>
+                </tr>
+              <% end %>  
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+</div>

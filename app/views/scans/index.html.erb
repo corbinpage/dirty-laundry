@@ -1,0 +1,37 @@
+<div class="jumbotron">
+  <div class="container">
+
+    <h1>Listing All Scans</h1>
+
+    <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Username</th>
+          <th>Sketch Score</th>
+          <!-- <th>Average Sentiment (-3 to 3)</th> -->
+          <th></th>
+          <th></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @scans.each do |scan| %>
+          <tr>
+            <td><%= scan.username %></td>
+            <td><%= scan.score %></td>
+            <!-- <td><%= scan.average_sentiment %></td> -->
+            <td><%= link_to 'Show', scan %></td>
+            <td><%= link_to 'Edit', edit_scan_path(scan) %></td>
+            <td><%= button_to 'Destroy', scan, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+    </div>
+
+    <br>
+
+    <%= link_to 'New Scan', new_scan_path %>
+  </div>
+</div>

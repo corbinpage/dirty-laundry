@@ -1,0 +1,56 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-3 col-md-2 sidebar">
+      <ul class="nav nav-sidebar">
+        <li class="active"><a href="#">Overview</a></li>
+        <li><a href="#">Reports</a></li>
+        <li><a href="#">Analytics</a></li>
+        <li><a href="#">Export</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+        <li><a href="">Nav item</a></li>
+      </ul>
+      <ul class="nav nav-sidebar">
+    </div>
+
+    <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+      <h1 class="page-header">Dashboard</h1>
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="panel panel-default"
+              <div class="panel-heading">
+                <h3 class="panel-title">Twitter Summary</h3>
+              </div>
+              <div class="panel-body">
+                Placeholder Text
+              </div>
+          </div>
+        </div>
+      <h2 class="sub-header">All Tweets</h2>
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Text</th>
+              <th>Score</th> 
+              <th>Dirty Words</th>
+              <th>Sentiment Score</th>
+              <th>Sentiment Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @scan.tweets.each do |t| %>
+              <tr>
+                <td><%= t.text %></td>
+                <td><%= t.score %></td>
+                <td><%= t.dirty_words %></td>
+                <td><%= t.sentiment_score %></td>
+                <td><%= t.sentiment_summary %></td>
+              </tr>
+            <% end %>  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

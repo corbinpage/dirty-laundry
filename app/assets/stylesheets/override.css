@@ -1,0 +1,110 @@
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  /* Margin bottom by footer height */
+  margin-bottom: 50px;
+}
+
+body.background-dark {
+  background-image: url("bgnoise_lg_dark.png");
+  background-color: rgba(102, 105, 104, 0.9);
+  background: radial-gradient(farthest-side ellipse at 10% 0, rgba(102, 105, 104, 0.9), rgba(93, 112, 119, 0.89), rgba(160, 174, 150, 0.9)), url("bgnoise_lg_dark.png");
+  background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(102, 105, 104, 0.9), rgba(93, 112, 119, 0.89), rgba(160, 174, 150, 0.9)), url("bgnoise_lg_dark.png");
+  background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(102, 105, 104, 0.9), rgba(93, 112, 119, 0.89), rgba(160, 174, 150, 0.9)), url("bgnoise_lg_dark.png");
+  height: 100%;
+}
+
+body > .container {
+  padding: 50px 15px 0;
+}
+
+main {
+  height: 100%;
+}
+
+.navbar {
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+}
+
+.navbar .navbar-nav > li > a {
+  color:black;
+  text-decoration:none;
+}
+
+.navbar .navbar-nav > li:hover {
+  background-color: #27ae60;
+  border-color: #27ae60;
+}
+
+.alert {
+  text-shadow: none;
+  border: none;
+  padding: 15px;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  border-radius: 1px;
+}
+
+.alert-success {
+  background-color: #56bc76;
+  border-color: #47b256;
+  color: #f8f8f8;
+}
+
+.alert-danger {
+  background-color: #e5603b;
+  border-color: #e22e24;
+  color: #f8f8f8;
+}
+
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 40px;
+  background-color: #2ecc71;
+  border-color: #2ecc71;
+  z-index: 1000;
+}
+
+.navbar-footer {
+  height: 100%;
+  padding-top: 10px;
+}
+
+.footer-list {
+  position: relative;
+  list-style: none;
+  display: table;
+  margin: 0 auto 0 auto;
+}
+
+.footer-list * {
+  color:black;
+  padding-right: 5px;
+  padding-left: 5px;
+  display: inline;
+}
+
+.footer-list a:hover {
+  color:white;
+  text-decoration:none;
+}
+
+/*------Scans/new------*/
+.form-signin {
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+}
+
+.btn-block {
+  margin-top: 10px;
+}
+/*---------------------*/

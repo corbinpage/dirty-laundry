@@ -1,0 +1,107 @@
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
+    <h1>Locations</h1>
+    <div class="row">
+      <div class="col-md-12 col-sm-12 widget twitter-profile">
+        <div class="twitter-profile-card">
+          <div class="twitter-text">
+            <h1 class="name"><%= @twitter_detail.name%></h1>
+            <h2 class="username"><%= @twitter_detail.user_name%></h2>
+            <p class="description"><%= @twitter_detail.description%></p>
+            <p class="location-website"><%=@twitter_detail.location%> - <a href=<%=@twitter_detail.website_url%>><%=@twitter_detail.website_url%></a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-3 col-xs-6">
+    <div class="box">
+      <div class="description">
+        <p><strong>Active Since</strong></p>
+        <p><%= @twitter_detail.account_created_at%><p>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-3 col-xs-6">
+    <div class="box">
+      <div class="icon">
+        <span class="glyphicon glyphicon-bullhorn"></span>
+      </div>
+      <div class="description">
+        <strong><%= @twitter_detail.total_tweets%></strong> Total Tweets
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-3 col-xs-6">
+    <div class="box">
+      <div class="icon">
+        <span class="glyphicon glyphicon-user"></span>
+      </div>
+      <div class="description">
+        <strong><%= @twitter_detail.followers_count%></strong> Followers
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-3 col-xs-6 col-sm-offset-3 col-md-offset-0">
+    <div class="box">
+      <div class="icon">
+        <span class="glyphicon glyphicon-eye-open"></span>
+      </div>
+      <div class="description">
+        Following <strong><%= @twitter_detail.following_count%></strong>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2 col-sm-3 col-xs-6">
+    <div class="box">
+      <div class="icon">
+        <span class="glyphicon glyphicon-star"></span>
+      </div>
+      <div class="description">
+        <strong><%= @twitter_detail.favorites_count%></strong> Favorites
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
+    <h1>Tweets Over Time</h1>
+    <div class="row">
+      <%= line_chart @scan.tweets.group_by_month(:tweet_time).count %>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3">
+    <h1>All Tweets</h1>
+    <div class="row">
+      <div class="table-responsive widget">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Text</th>
+              <th>Score</th> 
+              <th>Dirty Words</th>
+              <th>Sentiment Score</th>
+              <th>Sentiment Summary</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @scan.tweets.each do |t| %>
+              <tr>
+                <td><%= t.twitter_id %></td>
+                <td><%= t.text %></td>
+                <td><%= t.score %></td>
+                <td><%= t.dirty_words %></td>
+                <td><%= t.sentiment_score %></td>
+                <td><%= t.sentiment_summary %></td>
+              </tr>
+            <% end %>  
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
