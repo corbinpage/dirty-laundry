@@ -12,7 +12,7 @@
         </div>
       <% end %>
       <div class="field">
-        <%= f.text_field :username, placeholder: "Twitter Handle", value: "corbin_page", class: "form-control", autofocus: true %>
+        <%= f.text_field :username, placeholder: "Twitter Handle", value: current_user.username, class: "form-control", autofocus: true %>
       </div>
       <div class="actions">
         <%= f.submit "Start Scan", class: "btn btn-lg btn-success btn-block" %>

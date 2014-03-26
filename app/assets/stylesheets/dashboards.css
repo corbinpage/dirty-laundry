@@ -4,7 +4,7 @@
 */
 
 /*------Dashboard------*/
-
+ 
 /*.twitter-profile {
   height: 400px;
 }*/
@@ -28,10 +28,20 @@ h1 {
   color: #FFF;
 }
 
+.dirty-tweet-chart {
+  height: 405px;
+}
+
+#twitter-feed {
+  height: 405px;
+  overflow: scroll;
+  /*margin-top: 59px;*/
+}
 
 
 .chart {
   margin: 2px;
+  
 }
 
 /***********************************/
@@ -105,11 +115,25 @@ h1 {
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
+  color: white;
 }
-.nav-sidebar > .active > a {
-  color: #fff;
-  background-color: #428bca;
+
+.nav-sidebar > li > a:hover {
+  color: white;
+  background-color: #27ae60;
 }
+
+.analytics > #analytics,
+.summary > #summary,
+.locations > #locations {
+  background-color: #27ae60;
+}
+
+
+/*.nav-sidebar > .active > a:hover {
+  color: white;
+  background-color: #27ae60;
+}*/
 
 
 /*

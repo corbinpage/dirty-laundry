@@ -5,10 +5,11 @@
       <div class="col-md-12 col-sm-12 widget twitter-profile">
         <div class="twitter-profile-card">
           <div class="twitter-text">
+            <!-- Insert Image and Background Image here -->
             <h1 class="name"><%= @scan.twitter_detail.name%></h1>
             <h2 class="username"><%= @scan.twitter_detail.user_name%></h2>
             <p class="description"><%= @scan.twitter_detail.description%></p>
-            <p class="location-website"><%=@scan.twitter_detail.location%> - <a href=<%=@scan.twitter_detail.website_url%>><%=@scan.twitter_detail.website_url%></a></p>
+            <p class="location-website"><%=@scan.twitter_detail.location%> - <a target="_blank" href=<%=@scan.twitter_detail.website_url%>><%=@scan.twitter_detail.website_url%></a></p>
           </div>
         </div>
       </div>
@@ -65,6 +66,7 @@
     </div>
   </div>
 </div>
+<%unless @scan.twitter_detail.protected_tweets %>
 <div class="row">
   <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
     <h1>Tweets Over Time</h1>
@@ -73,3 +75,10 @@
     </div>
   </div>
 </div>
+<%else%>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 widget">
+    <h1 class="name">Your Tweets are protected!</h1>
+  </div>
+</div>
+<%end%>

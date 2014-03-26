@@ -1,75 +1,25 @@
+<%unless @dirty_tweets.empty?%>
 <div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
-    <h1>Summary Dashboard</h1>
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3 dirty-tweet-chart">
+    <h1>Dirty Tweets</h1>
     <div class="row">
-      <div class="col-md-12 col-sm-12 widget twitter-profile">
-        <div class="twitter-profile-card">
-          <div class="twitter-text">
-            <h1 class="name"><%= @scan.twitter_detail.name%></h1>
-            <h2 class="username"><%= @scan.twitter_detail.user_name%></h2>
-            <p class="description"><%= @scan.twitter_detail.description%></p>
-            <p class="location-website"><%=@scan.twitter_detail.location%> - <a href=<%=@scan.twitter_detail.website_url%>><%=@scan.twitter_detail.website_url%></a></p>
-          </div>
-        </div>
-      </div>
+      <div id="dirty-word-chart"></div>
+    </div>
+  </div>
+  <div class="col-md-4 col-sm-5">
+    <h1>Feed</h1>
+    <div id="twitter-feed">
+      <%@dirty_tweets.each do |t|%>
+        <%= t.html.html_safe %>
+      <%end%>
     </div>
   </div>
 </div>
+<%else%>
 <div class="row">
-  <div class="col-md-2 col-md-offset-2 col-sm-3 col-sm-offset-3 col-xs-6">
-    <div class="box">
-      <div class="description">
-        <p><strong>Active Since</strong></p>
-        <p><%= @scan.twitter_detail.account_created_at%><p>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-sm-3 col-xs-6">
-    <div class="box">
-      <div class="icon">
-        <span class="glyphicon glyphicon-bullhorn"></span>
-      </div>
-      <div class="description">
-        <strong><%= @scan.twitter_detail.total_tweets%></strong> Total Tweets
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-sm-3 col-xs-6">
-    <div class="box">
-      <div class="icon">
-        <span class="glyphicon glyphicon-user"></span>
-      </div>
-      <div class="description">
-        <strong><%= @scan.twitter_detail.followers_count%></strong> Followers
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-sm-3 col-xs-6 col-sm-offset-3 col-md-offset-0">
-    <div class="box">
-      <div class="icon">
-        <span class="glyphicon glyphicon-eye-open"></span>
-      </div>
-      <div class="description">
-        Following <strong><%= @scan.twitter_detail.following_count%></strong>
-      </div>
-    </div>
-  </div>
-  <div class="col-md-2 col-sm-3 col-xs-6">
-    <div class="box">
-      <div class="icon">
-        <span class="glyphicon glyphicon-star"></span>
-      </div>
-      <div class="description">
-        <strong><%= @scan.twitter_detail.favorites_count%></strong> Favorites
-      </div>
-    </div>
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3">
+    <h1>Congrations!</h1>
+    <h2>You do not have any Tweets with dirty words in them!</h2>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
-    <h1>Tweets Over Time</h1>
-    <div class="row">
-      <%= line_chart @scan.tweets.group_by_month(:tweet_time).count %>
-    </div>
-  </div>
-</div>
+<%end%>

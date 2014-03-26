@@ -52,6 +52,9 @@ GEM
     execjs (2.0.2)
     faraday (0.9.0)
       multipart-post (>= 1.2, < 3)
+    gon (5.0.4)
+      actionpack (>= 2.3.0)
+      json
     groupdate (2.1.0)
       activerecord (>= 3.0.0)
     hashie (2.0.5)
@@ -163,6 +166,7 @@ DEPENDENCIES
   bootstrap-sass
   chartkick
   coffee-rails (~> 4.0.0)
+  gon
   groupdate
   jbuilder (~> 1.2)
   jquery-rails

@@ -26,25 +26,28 @@ class Scan < ActiveRecord::Base
   end
 
   def get_users_statuses
+    return if self.twitter_detail.protected_tweets
+
     sentiment_analyzer = Sentimental.new
 
     full_tweets = Tweet.get_all_tweets_for_user(self.username)
-    # :max_id
-    # since_id - Gets tweets since a given ID
-
-
-
     total_score = 0
     total_sentiment = 0
     full_tweets.each do |t|
       new_tweet = Tweet.new(text: t.full_text, tweet_time: t.created_at,
                             twitter_id: t.id, scan_id: self.id)
-
+      
+      #Scan for Obscenities
       dirty_words = Obscenity.offensive(t.full_text)
+      if(dirty_words.count > 0)
+        new_tweet.score = dirty_words.count
+        total_score += new_tweet.score
+        new_tweet.dirty_words = dirty_words.join(', ')
+        new_tweet.get_tweet_html
+      else
+        new_tweet.score = 0
+      end
 
-      new_tweet.score = dirty_words.count
-      total_score += new_tweet.score
-      new_tweet.dirty_words = dirty_words.join(', ')
       new_tweet.sentiment_score = sentiment_analyzer.get_score(t.full_text)
       total_sentiment = new_tweet.sentiment_score
       new_tweet.sentiment_summary = sentiment_analyzer.get_sentiment(t.full_text)

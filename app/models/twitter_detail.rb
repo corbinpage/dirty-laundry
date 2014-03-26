@@ -44,6 +44,8 @@ class TwitterDetail < ActiveRecord::Base
     attribute_hash[:website_url] = user_object.website.to_s
     attribute_hash[:twitter_uid] = user_object.id
     attribute_hash[:twitter_url] = user_object.url.to_s
+    attribute_hash[:protected_tweets] = user_object.protected?
+
     attribute_hash
   end
 

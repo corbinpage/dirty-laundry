@@ -5,7 +5,11 @@ class ScansController < ApplicationController
   # GET /scans
   # GET /scans.json
   def index
-    @scans = Scan.all
+    if current_user.scans.empty? || current_user.username = "corbin_page"
+      @scans = Scan.all
+    else
+      @scans = current_user.scans
+    end
   end
 
   # GET /scans/1

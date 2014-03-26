@@ -19,6 +19,7 @@ class CreateTwitterDetails < ActiveRecord::Migration
       t.string    :twitter_uid
       t.integer   :user_id
       t.integer   :scan_id
+      t.boolean   :protected_tweets
 
       t.timestamps
     end

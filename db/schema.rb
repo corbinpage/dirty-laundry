@@ -43,6 +43,7 @@ ActiveRecord::Schema.define(version: 20140319004226) do
     t.integer  "scan_id"
     t.float    "sentiment_score"
     t.string   "sentiment_summary"
+    t.text     "html"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -68,6 +69,7 @@ ActiveRecord::Schema.define(version: 20140319004226) do
     t.string   "twitter_uid"
     t.integer  "user_id"
     t.integer  "scan_id"
+    t.boolean  "protected_tweets"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

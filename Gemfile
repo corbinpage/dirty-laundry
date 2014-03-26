@@ -27,6 +27,7 @@ gem 'jquery-rails'
 # Chartkick
 gem 'chartkick'
 gem 'groupdate'
+gem 'gon'
 
 ###Databases
 group :production do

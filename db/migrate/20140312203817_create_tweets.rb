@@ -9,6 +9,7 @@ class CreateTweets < ActiveRecord::Migration
       t.references :scan, index: true
       t.float     :sentiment_score
       t.string    :sentiment_summary
+      t.text      :html
 
       t.timestamps
     end
