@@ -1,6 +1,13 @@
 <div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
-    <h1>Analytics Dashboard</h1>
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3">
+    <h1>Tweet locations</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0 widget">
+    <div class="map_wrapper">
+      <div id="google-map"/>
+    </div>
   </div>
 </div>
 <div class="row">
@@ -50,22 +57,6 @@
       <div class="description">
         <strong><%= @scan.twitter_detail.favorites_count%></strong> Favorites
       </div>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
-    <h1>Obscenity Average Per Week</h1>
-    <div class="row">
-      <%= line_chart @scan.tweets.group_by_week(:tweet_time).average(:score) %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
-    <h1>Sentimentality Average Per Week</h1>
-    <div class="row">
-      <%= line_chart @scan.tweets.group_by_week(:tweet_time).average(:sentiment_score) %>
     </div>
   </div>
 </div>

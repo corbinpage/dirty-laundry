@@ -12,6 +12,7 @@
 
 development:
   adapter: postgresql
+  port: 5432
   encoding: unicode
   database: dirty-laundry_development
   pool: 5

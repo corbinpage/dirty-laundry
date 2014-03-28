@@ -5,6 +5,11 @@ gem 'rails', '4.0.3'
 
 # Twitter Gem
 gem 'twitter', '~>5.x'
+gem 'twitter-text'
+
+#Asynchronous Processing
+gem 'beanstalk-client'
+gem 'stalker'
 
 # Profanity Checker
 gem 'obscenity'
@@ -30,15 +35,17 @@ gem 'groupdate'
 gem 'gon'
 
 ###Databases
+gem 'pg'
+
 group :production do
-  gem 'pg'
+  # gem 'pg'
   # gem 'rails_12factor'
 end
 
 group :development do
   # Use sqlite3 as the database for Active Record
   # gem 'sqlite3'
-  gem 'pg'
+  # gem 'pg'
 
   #Make development easier
   gem 'quiet_assets'

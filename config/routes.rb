@@ -20,6 +20,7 @@ DirtyLaundry::Application.routes.draw do
   get '/dashboard/:id' => 'dashboards#summary', as: :dashboard
   get '/dashboard/:id/analytics' => 'dashboards#analytics'
   get '/dashboard/:id/locations' => 'dashboards#locations'
+  get '/dashboard/:id/connections' => 'dashboards#connections'
 
 
 

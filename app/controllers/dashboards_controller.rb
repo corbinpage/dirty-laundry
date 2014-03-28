@@ -1,5 +1,5 @@
 class DashboardsController < ApplicationController
-  before_action :set_scan, only: [:summary, :analytics, :locations]
+  before_action :set_scan, only: [:summary, :analytics, :locations, :connections]
   before_filter :login_required
   
   # GET /dashboard/current
@@ -10,7 +10,7 @@ class DashboardsController < ApplicationController
   # GET /dashboard/:id
   def summary
     #set_scan
-    @dashboard_type = "summary"
+    @dashboard_type = gon.dashboard_type = "summary"
   end
 
   # GET /dashboard/:id/analytics
@@ -18,14 +18,24 @@ class DashboardsController < ApplicationController
     #set_scan
     @dirty_tweets = @scan.tweets.where('score > 0')
     gon.dirty_tweets = structure_dirty_tweets_for_chart(@dirty_tweets) unless @dirty_tweets.empty?
-    puts gon.dirty_tweets
-    @dashboard_type = "analytics"
+    @dashboard_type = gon.dashboard_type = "analytics"
   end
 
   # GET /dashboard/:id/locations
   def locations
     #set_scan
-    @dashboard_type = "locations"
+    @location_tweets = @scan.tweets.where('has_geo = true')
+    gon.location_tweets = @location_tweets
+    @dashboard_type = gon.dashboard_type = "locations"
+  end
+
+  # GET /dashboard/:id/connections
+  def connections
+    #set_scan
+    # @location_tweets = @scan.tweets.where('has_geo = true')   
+    # gon.location_tweets = @location_tweets.collect{|t| [t.text,t.lat,t.lng]}
+    # puts gon.location_tweets
+    @dashboard_type = gon.dashboard_type = "connections"
   end
 
   def sub_layout

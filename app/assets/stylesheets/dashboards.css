@@ -38,6 +38,16 @@ h1 {
   /*margin-top: 59px;*/
 }
 
+#map_wrapper {
+    height: 400px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+#google-map {
+  height: 400px;
+  width: 100%;
+}
 
 .chart {
   margin: 2px;
@@ -112,10 +122,21 @@ h1 {
   margin-bottom: 20px;
   margin-left: -20px;
 }
+
+.nav-sidebar > li {
+  display: list-item;
+}
+
 .nav-sidebar > li > a {
   padding-right: 20px;
   padding-left: 20px;
   color: white;
+  display: block;
+}
+
+.nav-sidebar > li > a > .icon{
+  float: right;
+  con
 }
 
 .nav-sidebar > li > a:hover {
@@ -125,7 +146,8 @@ h1 {
 
 .analytics > #analytics,
 .summary > #summary,
-.locations > #locations {
+.locations > #locations, 
+.connections > #connections, {
   background-color: #27ae60;
 }
 

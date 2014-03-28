@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140319004226) do
+ActiveRecord::Schema.define(version: 20140328175042) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,51 @@ ActiveRecord::Schema.define(version: 20140319004226) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "hashtag_tweets", force: true do |t|
+    t.integer  "tweet_id"
+    t.integer  "hashtag_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "hashtags", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "hashtags", ["text"], name: "index_hashtags_on_text", using: :btree
+
+  create_table "link_tweets", force: true do |t|
+    t.integer  "tweet_id"
+    t.integer  "link_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "links", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "links", ["text"], name: "index_links_on_text", using: :btree
+
+  create_table "mention_tweets", force: true do |t|
+    t.integer  "tweet_id"
+    t.integer  "mention_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mentions", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "mentions", ["text"], name: "index_mentions_on_text", using: :btree
 
   create_table "scans", force: true do |t|
     t.string   "username"
@@ -39,16 +84,19 @@ ActiveRecord::Schema.define(version: 20140319004226) do
     t.string   "twitter_id"
     t.datetime "tweet_time"
     t.integer  "score"
-    t.text     "dirty_words"
     t.integer  "scan_id"
     t.float    "sentiment_score"
     t.string   "sentiment_summary"
     t.text     "html"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "has_geo"
+    t.float    "lat"
+    t.float    "lng"
   end
 
   add_index "tweets", ["scan_id"], name: "index_tweets_on_scan_id", using: :btree
+  add_index "tweets", ["twitter_id"], name: "index_tweets_on_twitter_id", using: :btree
 
   create_table "twitter_details", force: true do |t|
     t.string   "oauth_token_secret"
@@ -86,5 +134,21 @@ ActiveRecord::Schema.define(version: 20140319004226) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
+
+  create_table "word_tweets", force: true do |t|
+    t.integer  "word_id"
+    t.integer  "tweet_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "word_tweets", ["tweet_id"], name: "index_word_tweets_on_tweet_id", using: :btree
+  add_index "word_tweets", ["word_id"], name: "index_word_tweets_on_word_id", using: :btree
+
+  create_table "words", force: true do |t|
+    t.string   "text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
 end

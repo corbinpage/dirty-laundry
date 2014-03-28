@@ -2,10 +2,35 @@
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar side-nav <%=@dashboard_type%>">
-        <li id="summary"><a href=<%="/dashboard/#{@scan.id}"%>>Summary</a></li>
-        <li id="analytics"><a href=<%="/dashboard/#{@scan.id}/analytics"%>>Analytics</a></li>
-        <li id="locations"><a href=<%="/dashboard/#{@scan.id}/locations"%>>Locations</a></li>
-        <li><a href="#">Exports</a></li>
+        <li id="summary">
+          <a href=<%="/dashboard/#{@scan.id}"%>>Summary
+            <div class = "icon">
+              <span class="glyphicon glyphicon-home"></span>
+            </div>
+          </a>
+        </li>
+        <li id="analytics">
+          <a href=<%="/dashboard/#{@scan.id}/analytics"%>>Analytics
+            <div class = "icon">
+              <span class="glyphicon glyphicon-stats"></span>
+            </div>
+          </a>
+        </li>
+        <li id="locations">
+          <a href=<%="/dashboard/#{@scan.id}/locations"%>>Locations
+            <div class = "icon">
+              <span class="glyphicon glyphicon-globe"></span>
+            </div>
+          </a>
+        </li>
+        <li id="connections" class="disabled">
+          <!-- <a href=<%="/dashboard/#{@scan.id}/connections"%>>Connections -->
+          <a name="connections"%>Connections
+            <div class = "icon">
+              <span class="glyphicon glyphicon-user"></span>
+            </div>
+          </a>
+        </li>
       </ul>
     </div>
   </div>

@@ -32,8 +32,14 @@ class ScansController < ApplicationController
   def create
     @scan = Scan.create(scan_params)
     @scan.user = current_user
+    Tweet.initialize_twitter_client
+    @user = Tweet.client.user(@scan.username)
+    # Need to put in logic if the twitter user does not exist
+    @scan.twitter_detail = TwitterDetail.new(TwitterDetail.user_attributes(@user))
+    @scan.save
     @scan.run
-
+    # Stalker.enqueue("scan.run", id: @scan.id)
+    
     respond_to do |format|
       if @scan.save
         format.html { redirect_to @scan, notice: 'Scan was successfully created.' }
