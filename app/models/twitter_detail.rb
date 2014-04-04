@@ -31,8 +31,8 @@ class TwitterDetail < ActiveRecord::Base
   def self.user_attributes(user_object)
     attribute_hash = {}
     attribute_hash[:name] = user_object.name
-    attribute_hash[:profile_image_url] = user_object.profile_image_url_https.to_s
-    attribute_hash[:background_image_url] = user_object.profile_background_image_url_https.to_s
+    attribute_hash[:profile_image_url] = user_object.profile_image_url.to_s.gsub('normal','bigger')
+    attribute_hash[:background_image_url] = user_object.profile_banner_url_https.to_s
     attribute_hash[:account_created_at] = user_object.created_at
     attribute_hash[:location] = user_object.location
     attribute_hash[:favorites_count] = user_object.favorites_count
@@ -41,7 +41,11 @@ class TwitterDetail < ActiveRecord::Base
     attribute_hash[:following_count] = user_object.friends_count
     attribute_hash[:total_tweets] = user_object.statuses_count
     attribute_hash[:user_name] = user_object.username
-    attribute_hash[:website_url] = user_object.website.to_s
+    begin
+      attribute_hash[:website_url] = user_object.to_h[:entities][:url][:urls][0][:expanded_url]
+    rescue
+      puts "No website found for " + user_object.username
+    end
     attribute_hash[:twitter_uid] = user_object.id
     attribute_hash[:twitter_url] = user_object.url.to_s
     attribute_hash[:protected_tweets] = user_object.protected?

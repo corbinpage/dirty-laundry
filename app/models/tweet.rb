@@ -22,28 +22,34 @@ class Tweet < ActiveRecord::Base
     end
   end
 
+  def self.initialize_streaming_twitter_client
+    client = Twitter::Streaming::Client.new do |config|
+      config.consumer_key     = SKETCH_METER_CONSUMER_KEY
+      config.consumer_secret  = SKETCH_METER_CONSUMER_SECRET
+      config.access_token        = "35549209-J3RLhELALa3czISlquboZRaP4eOXQTHmGfSh4PsE0"
+      config.access_token_secret = "diqHptCj7SysbDIbf8MsG9VXXittpBuQI6yZvSbSZHQqI"
+    end
+  end
+
+
+
   def self.get_all_tweets_for_user(username)
     all_tweets = @@client.user_timeline(username, count: 200, exclude_replies: true, include_rts: false)
     # :max_id
     # since_id - Gets tweets since a given ID
 
-    more_tweets_available = all_tweets.count >= 10
+    more_tweets_available = all_tweets.count >= 3
 
     while more_tweets_available
       more_tweets = @@client.user_timeline(username, count: 200, max_id: all_tweets.last.id, exclude_replies: true, include_rts: false)
       all_tweets += more_tweets
-      more_tweets_available = more_tweets.count >= 10
+      more_tweets_available = more_tweets.count >= 3
     end
     all_tweets
   end
 
   def self.client
     @@client
-  end
-
-  def get_tweet_html
-    tweet = Tweet.client.oembed(self.twitter_id)
-    self.html = tweet.html.gsub(/<script(.*?)$/,'') # Trims everything after the s cript tag
   end
 
   def count_obscenities
@@ -53,7 +59,7 @@ class Tweet < ActiveRecord::Base
       self.get_tweet_html
       dirty_words.each do |w|
         self.words.push(Word.find_or_create_by(text: w))
-      end  
+      end
     else
       self.score = 0
     end
@@ -75,13 +81,13 @@ class Tweet < ActiveRecord::Base
     # Extract Mentions
     extract_mentioned_screen_names(self.text).each do |w|
       self.mentions.push(Mention.find_or_create_by(text: w))
-    end    
+    end
 
     # Extract Links
     extract_urls(self.text).each do |w|
       self.links.push(Link.find_or_create_by(text: w))
     end
-  
+
     # Extract Hashtags
     extract_hashtags(self.text).each do |w|
       self.hashtags.push(Hashtag.find_or_create_by(text: w))
@@ -90,6 +96,25 @@ class Tweet < ActiveRecord::Base
 
   def obscenity_count
     self.obscenities.count
+  end
+
+  def risque_string=(name_arr)
+    @risque_string = name_arr.join(', ')
+  end
+
+  def risque_string
+    @risque_string
+  end
+
+  def get_tweet_html
+    begin
+      tweet = Tweet.client.oembed(self.twitter_id)
+      self.html = tweet.html.gsub(/<script(.*?)$/,'') # Trims everything after the s cript tag
+      puts "Tweet scanned"
+    rescue
+      puts "Tweet scan fail"
+      # raise "HTML scan limit reached for embedded Tweets."
+    end
   end
 
   # Could be Deprecateds

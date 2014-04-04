@@ -4,6 +4,11 @@
 // Summary                  #########################################################################
 if(gon.dashboard_type == "summary"){
 
+
+
+
+
+
 }
 // Analytics                #########################################################################
 else if(gon.dashboard_type == "analytics") {
@@ -75,7 +80,96 @@ $(function () {
                 }
             },
             series: [{
-                data: gon.dirty_tweets
+                showInLegend: false,
+                name: "Tweets",
+                data: gon.dirty_tweets,
+                color: '#00aeed'
+            }]
+        });
+    });
+
+$(function () {
+        $('#favorite-hashtags-chart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Most prevalent Hashtags'
+            },
+            xAxis: {
+                categories: gon.hashtag_text
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Times Used'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.y +': </b>' + this.x;
+                }
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                showInLegend: false,
+                data: gon.hashtag_values,
+                color: '#00aeed'
+            }]
+        });
+    });
+    
+$(function () {
+        $('#most-mentioned-chart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Most Often Mentioned Users'
+            },
+            xAxis: {
+                categories: gon.mention_text
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'Times Mentioned'
+                },
+                labels: {
+                    overflow: 'justify'
+                }
+            },
+            tooltip: {
+                formatter: function() {
+                    return '<b>'+ this.y +': </b>' + this.x;
+                }
+            },
+            plotOptions: {
+                bar: {
+                    dataLabels: {
+                        enabled: true
+                    }
+                }
+            },
+            credits: {
+                enabled: false
+            },
+            series: [{
+                showInLegend: false,
+                data: gon.mention_values,
+                color: '#00aeed'
             }]
         });
     });
@@ -154,7 +248,19 @@ function initialize() {
 // Connections                #########################################################################
 else if(gon.dashboard_type == "connections") {
 
-
+function scrollToTop(index)
+{
+  var container = $("#twitter-feed");
+  var scrollTo = $('#twitter-widget-' + index.toString());
+  // console.log(index)
+  // console.log(scrollTo)
+  container.animate({
+    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+    }, {
+    duration: 400
+    }
+  );
+}
 
 }
 

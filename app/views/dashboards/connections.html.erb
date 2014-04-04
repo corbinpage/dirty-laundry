@@ -55,17 +55,47 @@
 </div>
 <div class="row">
   <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
-    <h1>Obscenity Average Per Week</h1>
-    <div class="row">
-      <%= line_chart @scan.tweets.group_by_week(:tweet_time).average(:score) %>
-    </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
     <h1>Sentimentality Average Per Week</h1>
     <div class="row">
       <%= line_chart @scan.tweets.group_by_week(:tweet_time).average(:sentiment_score) %>
     </div>
   </div>
 </div>
+<%unless @dirty_tweets.empty?%>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3">
+    <h1>Risque Words</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3">
+    <%@dirty_tweets.each_with_index do |t,i|%>
+      <div class="box col-md-2 col-sm-2" onclick="scrollToTop(<%=i%>)">
+        <div class="description">
+          <p><%= t.risque_string%></p>
+        </div>
+      </div>
+    <%end%>
+  </div>
+  <div class="col-md-4 col-sm-5">
+    <div id="twitter-feed">
+      <%@dirty_tweets.each do |t|%>
+        <%= t.html.html_safe unless t.html.nil?%>
+      <%end%>
+    </div>
+  </div>
+</div>
+<div class="row spacer">
+  <span>_</span>
+</div>
+<div class="row spacer">
+  <span>_</span>
+</div>
+<%else%>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 widget">
+    <h1>Congrations!</h1>
+    <h2>You do not have any Tweets with dirty words in them!</h2>
+  </div>
+</div>
+<%end%>

@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container-fluid <%=@dashboard_type%>">
   <div class="row">
     <div class="col-sm-3 col-md-2 sidebar">
       <ul class="nav nav-sidebar side-nav <%=@dashboard_type%>">
@@ -16,8 +16,9 @@
             </div>
           </a>
         </li>
-        <li id="locations">
-          <a href=<%="/dashboard/#{@scan.id}/locations"%>>Locations
+        <li id="locations" class="disabled">
+          <!-- <a href=<%="/dashboard/#{@scan.id}/locations"%>>Locations -->
+          <a name="locations">Locations
             <div class = "icon">
               <span class="glyphicon glyphicon-globe"></span>
             </div>
@@ -32,6 +33,12 @@
           </a>
         </li>
       </ul>
+      <% unless @dashboard_type == "summary"%>
+      <div class="twitter-sidebar">
+        <img class="twitter-profile-pic" src="<%=@scan.twitter_detail.profile_image_url%>" alt="Corbin Page">
+        <h4 class="username"><%= @scan.twitter_detail.user_name%></h4>
+      </div>
+      <%end%>
     </div>
   </div>
   <%= yield %>

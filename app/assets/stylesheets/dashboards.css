@@ -19,8 +19,44 @@ h1 {
   font-weight: 300;
 }
 
-.twitter-profile-card {
+.spacer {
+    margin-top: 10px;
+}
+
+.twitter-sidebar {
   text-align: center;
+  color: white;
+}
+
+.twitter-profile {
+  margin-bottom: 10px;
+}
+
+.twitter-profile-card {
+  background-color: #444;
+  height: 295px;
+  padding: 0;
+  text-align: center;
+  overflow: hidden;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  display: block;
+}
+
+.twitter-profile-pic {
+  float: none;
+  border-radius: 3px;
+/*  width: 73px;
+  height: 73px;*/
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 30px;
+  border-style: solid;
+  border-color: white;
+  border-width: 5px;
 }
 
 .twitter-profile-card .twitter-text {
@@ -90,6 +126,14 @@ h1 {
   color: white;
 }
 
+.connections .box {
+  border-radius: 4px;
+  margin-right: 5px;
+  margin-bottom: 10px;
+  margin-left: 10px;
+  overflow: hidden;
+}
+
 /*
  * Sidebar
  */
@@ -147,15 +191,9 @@ h1 {
 .analytics > #analytics,
 .summary > #summary,
 .locations > #locations, 
-.connections > #connections, {
+.connections > #connections {
   background-color: #27ae60;
 }
-
-
-/*.nav-sidebar > .active > a:hover {
-  color: white;
-  background-color: #27ae60;
-}*/
 
 
 /*

@@ -1,23 +1,62 @@
+<div class="row">
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3">
+    <h1>Favorite Hashtags</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 dirty-tweet-chart">
+      <div id="favorite-hashtags-chart"></div>
+  </div>
+</div>
+<div class="row spacer">
+  <span>_</span>
+</div>
+<div class="row">
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3">
+    <h1>Besties</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 dirty-tweet-chart">
+      <div id="most-mentioned-chart"></div>
+  </div>
+</div>
+<div class="row spacer">
+  <span>_</span>
+</div>
+<!-- Favorite Links/domains -->
+<!-- Dirty Words -->
+
+
 <%unless @dirty_tweets.empty?%>
 <div class="row">
+  <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3">
+    <h1>Risque Words</h1>
+  </div>
+</div>
+<div class="row">
   <div class="col-md-6 col-md-offset-2 col-sm-4 col-sm-offset-3 dirty-tweet-chart">
-    <h1>Dirty Tweets</h1>
     <div class="row">
       <div id="dirty-word-chart"></div>
     </div>
   </div>
   <div class="col-md-4 col-sm-5">
-    <h1>Feed</h1>
     <div id="twitter-feed">
       <%@dirty_tweets.each do |t|%>
-        <%= t.html.html_safe %>
+        <%= t.html.html_safe unless t.html.nil?%>
       <%end%>
     </div>
   </div>
 </div>
+<div class="row spacer">
+  <span>_</span>
+</div>
+<div class="row spacer">
+  <span>_</span>
+</div>
 <%else%>
 <div class="row">
-  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3">
+  <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 widget">
     <h1>Congrations!</h1>
     <h2>You do not have any Tweets with dirty words in them!</h2>
   </div>

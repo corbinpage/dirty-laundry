@@ -3,6 +3,33 @@ class Scan < ActiveRecord::Base
   has_many :tweets, :dependent => :destroy
   has_one :twitter_detail, :dependent => :destroy
 
+  @@stream_running
+
+  def initialize_twitter_stream
+    @client = Tweet.initialize_streaming_twitter_client
+
+    topics = ["coffee", "tea"]
+    i = 0
+    @@stream_running = true
+    @client.filter(:track => topics.join(",")) do |object|
+      if object.is_a?(Twitter::Tweet)
+        puts object.text if object.is_a?(Twitter::Tweet)
+        parse_and_save_tweet(object) if object.is_a?(Twitter::Tweet)
+        puts i.to_s
+        i+= 1
+      end
+      break if i >= 100
+    end
+    @@stream_running = false
+  end
+
+  def stream_running
+    @@stream_running
+  end
+
+  def stream_running=(bool)
+    @@stream_running = bool
+  end
 
   def run
     @client = Tweet.initialize_twitter_client
@@ -45,8 +72,8 @@ class Scan < ActiveRecord::Base
 
       # Set geolocation if applicable
       new_tweet.has_geo = t.geo? ? new_tweet.record_geolocation(t.geo) : false
-      
-      # Scan for Sentimentality      
+
+      # Scan for Sentimentality
       total_sentiment += new_tweet.score_sentimentality(sentiment_analyzer)
 
       # Scan for Obscenities
@@ -76,6 +103,36 @@ class Scan < ActiveRecord::Base
     x = 0
     self.tweets.each{|i| i.dirty_word_count + x}
     x
+  end
+
+  def parse_and_save_tweet(twitter_object)
+    return if twitter_object.nil?
+
+    sentiment_analyzer = Sentimental.new
+
+    # Create Tweet Objects
+    new_tweet = Tweet.new(text: twitter_object.full_text,
+                          tweet_time: twitter_object.created_at,
+                          twitter_id: twitter_object.id,
+                          scan_id: self.id)
+
+    # Set geolocation if applicable
+    new_tweet.has_geo = twitter_object.geo? ? new_tweet.record_geolocation(twitter_object.geo) : false
+
+    # Scan for Sentimentality
+    new_tweet.score_sentimentality(sentiment_analyzer)
+
+    # Scan for Obscenities
+    new_tweet.count_obscenities
+
+    # Scan for Hashtags, Mentions, and Links
+    new_tweet.start_twitter_text_scan
+
+    # Find popular links - instagram, twitpic
+    # Find all people mentioned
+    # Common words used
+
+    new_tweet.save
   end
 
 end

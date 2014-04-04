@@ -2,6 +2,7 @@ DirtyLaundry::Application.routes.draw do
 
   ### Application home and splash page
   get 'application' => 'application#home', as: :splash
+  get 'nyc' => 'application#nyc', as: :nyc
   root "application#home" 
 
 

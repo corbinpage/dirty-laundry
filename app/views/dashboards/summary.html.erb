@@ -2,10 +2,14 @@
   <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 twitter-profile">
     <h1>Summary Dashboard</h1>
     <div class="row">
-      <div class="col-md-12 col-sm-12 widget twitter-profile">
+      <div class="col-md-12 col-sm-12 twitter-profile">
+        <!-- <div class="twitter-profile-card" style="background-image:url(<%=@scan.twitter_detail.background_image_url%>)"> -->
         <div class="twitter-profile-card">
+          <div>
+            <img class="twitter-profile-pic" src="<%=@scan.twitter_detail.profile_image_url%>" alt="Corbin Page">
+          </div>
           <div class="twitter-text">
-            <!-- Insert Image and Background Image here -->
+            <!-- Insert Image and Background Image here --> 
             <h1 class="name"><%= @scan.twitter_detail.name%></h1>
             <h2 class="username"><%= @scan.twitter_detail.user_name%></h2>
             <p class="description"><%= @scan.twitter_detail.description%></p>
@@ -70,8 +74,9 @@
 <div class="row">
   <div class="col-md-10 col-md-offset-2 col-sm-9 col-sm-offset-3 col-md-offset-0">
     <h1>Tweets Over Time</h1>
+    <h2>Tweets Per Month</h2>
     <div class="row">
-      <%= line_chart @scan.tweets.group_by_month(:tweet_time).count library: {backgroundColor: "#eee"} %>
+      <%= line_chart @scan.tweets.group_by_month(:tweet_time).count, library: {colors: ['#00aeed']}%>
     </div>
   </div>
 </div>
@@ -79,13 +84,13 @@
   <div class="col-md-5 col-md-offset-2 col-sm-4 col-sm-offset-3 col-md-offset-0">
     <h2>Tweets By Weekday</h2>
     <div class="row">
-      <%= column_chart @scan.tweets.group_by_day_of_week(:tweet_time, format: "%a").count %>
+      <%= column_chart @scan.tweets.group_by_day_of_week(:tweet_time, format: "%a").count, library: {colors: ['#00aeed']}%>
     </div>
   </div>
   <div class="col-md-5 col-sm-4 col-sm-offset-1 col-md-offset-0">
-    <h2>Tweets By Weekday</h2>
+    <h2>Tweets By Hour</h2>
     <div class="row">
-      <%= line_chart @scan.tweets.group_by_day_of_week(:tweet_time).count %>
+      <%= bar_chart @scan.tweets.group_by_hour_of_day(:tweet_time, time_zone: "Eastern Time (US & Canada)").count, library: {colors: ['#00aeed']}%>
     </div>
   </div>
 </div>
