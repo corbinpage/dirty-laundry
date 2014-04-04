@@ -26,8 +26,8 @@ class Tweet < ActiveRecord::Base
     client = Twitter::Streaming::Client.new do |config|
       config.consumer_key     = SKETCH_METER_CONSUMER_KEY
       config.consumer_secret  = SKETCH_METER_CONSUMER_SECRET
-      config.access_token        = "35549209-J3RLhELALa3czISlquboZRaP4eOXQTHmGfSh4PsE0"
-      config.access_token_secret = "diqHptCj7SysbDIbf8MsG9VXXittpBuQI6yZvSbSZHQqI"
+      config.access_token        = ""
+      config.access_token_secret = ""
     end
   end
 
